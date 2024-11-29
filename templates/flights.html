@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Available Flights</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Available Flights</h1>
+    {% if flights %}
+        <table>
+            <tr>
+                <th>Flight Number</th>
+                <th>Airline</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Price</th>
+                <th>Book</th>
+            </tr>
+            {% for flight in flights %}
+                <tr>
+                    <td>{{ flight['flight_number'] }}</td>
+                    <td>{{ flight['airline'] }}</td>
+                    <td>{{ flight['departure_time'] }}</td>
+                    <td>{{ flight['arrival_time'] }}</td>
+                    <td>{{ flight['price'] }}</td>
+                    <td><a href="{{ url_for('book', flight_id=flight['flight_id']) }}">Book</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No flights available.</p>
+    {% endif %}
+</body>
+</html>
